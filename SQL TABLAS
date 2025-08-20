@@ -1,0 +1,19 @@
+
+CREATE DATABASE GestorPlantasDB;
+GO
+USE GestorPlantasDB;
+GO
+
+CREATE TABLE Categorias(
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  NombreCategoria NVARCHAR(80) NOT NULL
+);
+
+CREATE TABLE Plantas(
+  Id INT IDENTITY(1,1) PRIMARY KEY,
+  Nombre NVARCHAR(100) NOT NULL,
+  Descripcion NVARCHAR(200) NULL,
+  CategoriaId INT NOT NULL,
+  CONSTRAINT FK_Plantas_Categorias
+    FOREIGN KEY (CategoriaId) REFERENCES Categorias(Id)
+);
