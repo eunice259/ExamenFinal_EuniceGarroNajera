@@ -1,0 +1,69 @@
+-- CATEGORÍAS
+CREATE PROCEDURE spCategorias_Listar AS
+BEGIN
+  SELECT Id, NombreCategoria FROM Categorias ORDER BY NombreCategoria;
+END
+GO
+CREATE PROCEDURE spCategorias_Insertar @NombreCategoria NVARCHAR(80) AS
+BEGIN
+  INSERT INTO Categorias(NombreCategoria) VALUES(@NombreCategoria);
+END
+GO
+CREATE PROCEDURE spCategorias_Actualizar @Id INT, @NombreCategoria NVARCHAR(80) AS
+BEGIN
+  UPDATE Categorias SET NombreCategoria=@NombreCategoria WHERE Id=@Id;
+END
+GO
+CREATE PROCEDURE spCategorias_Eliminar @Id INT AS
+BEGIN
+  DELETE FROM Categorias WHERE Id=@Id;
+END
+GO
+
+-- PLANTAS
+CREATE PROCEDURE spPlantas_Listar AS
+BEGIN
+  SELECT p.Id, p.Nombre, p.Descripcion, p.CategoriaId, c.NombreCategoria
+  FROM Plantas p INNER JOIN Categorias c ON c.Id = p.CategoriaId
+  ORDER BY p.Id DESC;
+END
+GO
+CREATE PROCEDURE spPlantas_Insertar
+  @Nombre NVARCHAR(100), @Descripcion NVARCHAR(200), @CategoriaId INT AS
+BEGIN
+  INSERT INTO Plantas(Nombre, Descripcion, CategoriaId)
+  VALUES(@Nombre, @Descripcion, @CategoriaId);
+END
+GO
+CREATE PROCEDURE spPlantas_Actualizar
+  @Id INT, @Nombre NVARCHAR(100), @Descripcion NVARCHAR(200), @CategoriaId INT AS
+BEGIN
+  UPDATE Plantas
+  SET Nombre=@Nombre, Descripcion=@Descripcion, CategoriaId=@CategoriaId
+  WHERE Id=@Id;
+END
+GO
+CREATE PROCEDURE spPlantas_Eliminar @Id INT AS
+BEGIN
+  DELETE FROM Plantas WHERE Id=@Id;
+END
+GO
+CREATE PROCEDURE spPlantas_PorCategoria @CategoriaId INT AS
+BEGIN
+  SELECT p.Id, p.Nombre, p.Descripcion, c.NombreCategoria
+  FROM Plantas p INNER JOIN Categorias c ON c.Id=p.CategoriaId
+  WHERE p.CategoriaId=@CategoriaId
+  ORDER BY p.Nombre;
+END
+GO
+
+-- REPORTE 
+CREATE PROCEDURE spReporte_PlantasPorCategoria AS
+BEGIN
+  SELECT c.NombreCategoria, COUNT(p.Id) AS CantidadPlantas
+  FROM Categorias c
+  LEFT JOIN Plantas p ON c.Id = p.CategoriaId
+  GROUP BY c.NombreCategoria
+  ORDER BY c.NombreCategoria;
+END
+GO
