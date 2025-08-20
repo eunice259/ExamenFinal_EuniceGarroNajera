@@ -1,0 +1,17 @@
+﻿body {
+    font-family: Segoe UI, Arial;
+    background: #f6f8f9;
+    margin: 0;
+}
+
+h2 {
+    margin: 10px;
+}
+
+form {
+    margin: 10px;
+}
+
+input, select, textarea {
+    margin-right: 6px;
+}

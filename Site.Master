@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ExamenFinal_EuniceGarroNajera.Site" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Gestor de Plantas</title>
+    <link href="Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <form runat="server">
+        <div style="background: #2b7a0b; color: #fff; padding: 10px; border-radius: 6px; margin: 10px;">
+            <b>Gestor de Plantas</b> |
+            <a runat="server" href="~/CapaVistas/Categorias.aspx" style="color: #fff;">Categorías</a> |
+            <a runat="server" href="~/CapaVistas/Plantas.aspx" style="color: #fff;">Plantas</a> |
+            <a runat="server" href="~/CapaVistas/Consulta.aspx" style="color: #fff;">Consulta</a> |
+            <a runat="server" href="~/CapaVistas/Reporte.aspx" style="color: #fff;">Reporte</a>
+
+
+        </div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </form>
+</body>
+</html>
+
+
